@@ -1,6 +1,8 @@
 package pl.m4zek.carrental.api.model.projection;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public class OfferWriteModel {
@@ -11,15 +13,16 @@ public class OfferWriteModel {
 
     private final String status;
 
-    private final Date data_available;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private final LocalDate availableDate;
 
     private final List<String> offer_role_ids;
 
-    public OfferWriteModel(String car_id, Double price, String status, Date data_available, List<String> offer_role_ids) {
+    public OfferWriteModel(String car_id, Double price, String status, LocalDate availableDate, List<String> offer_role_ids) {
         this.car_id = car_id;
         this.price = price;
         this.status = status.trim().toUpperCase();
-        this.data_available = data_available;
+        this.availableDate = availableDate;
         this.offer_role_ids = offer_role_ids;
     }
 
@@ -35,22 +38,12 @@ public class OfferWriteModel {
         return status;
     }
 
-    public Date getData_available() {
-        return data_available;
+    public LocalDate getAvailableDate() {
+        return availableDate;
     }
 
     public List<String> getOffer_role_ids() {
         return offer_role_ids;
     }
 
-    @Override
-    public String toString() {
-        return "OfferWriteModel{" +
-                "car_id='" + car_id + '\'' +
-                ", basic_price=" + price +
-                ", status='" + status + '\'' +
-                ", data_available=" + data_available +
-                ", offer_role_ids=" + offer_role_ids +
-                '}';
-    }
 }

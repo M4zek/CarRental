@@ -4,7 +4,7 @@ import pl.m4zek.carrental.api.model.Car;
 import pl.m4zek.carrental.api.model.Offer;
 import pl.m4zek.carrental.api.model.Status;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,16 +16,16 @@ public class OfferReadModel {
 
     private final Double price;
 
-    private final Date data_available;
-
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+    private final LocalDate availableDate;
     private final Status status;
     private final List<OfferRolesReadModel> offerRoles;
 
-    public OfferReadModel(Car car, Double price, Status status, Date data_available,  List<OfferRolesReadModel> offerRoles) {
+    public OfferReadModel(Car car, Double price, Status status, LocalDate availableDate, List<OfferRolesReadModel> offerRoles) {
         this.car = car;
         this.price = price;
         this.status = status;
-        this.data_available = data_available;
+        this.availableDate = availableDate;
         this.offerRoles = offerRoles;
     }
 
@@ -38,7 +38,34 @@ public class OfferReadModel {
                 .map(OfferRolesReadModel::new)
                 .collect(Collectors.toList());
         this.car = source.getCar();
-        this.data_available = source.getAvailable_date();
+        this.availableDate = source.getAvailableDate();
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public LocalDate getAvailableDate() {
+        return availableDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public List<OfferRolesReadModel> getOfferRoles() {
+        return offerRoles;
+    }
 }

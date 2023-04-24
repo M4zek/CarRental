@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Document(value = "offers")
@@ -15,15 +14,15 @@ public class Offer {
     private Car car;
     private Double price;
     private List<OfferRoles> offerRoles;
-    private Date available_date;
+    private LocalDate availableDate;
     private Status status;
 
-    public Offer(Car car, Double price, List<OfferRoles> offerRoles, Status status, Date availableDate) {
+    public Offer(Car car, Double price, List<OfferRoles> offerRoles, Status status, LocalDate availableDate) {
         this.car = car;
         this.price = price;
         this.offerRoles = offerRoles;
         this.status = status;
-        this.available_date = availableDate;
+        this.availableDate = availableDate;
     }
 
     public String getId() {
@@ -66,11 +65,11 @@ public class Offer {
         this.status = status;
     }
 
-    public Date getAvailable_date() {
-        return available_date;
+    public LocalDate getAvailableDate() {
+        return availableDate;
     }
 
-    public void setAvailable_date(Date available_date) {
-        this.available_date = available_date;
+    public void setAvailableDate(LocalDate availableDate) {
+        this.availableDate = availableDate;
     }
 }

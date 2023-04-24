@@ -1,6 +1,7 @@
 package pl.m4zek.carrental.api.logic;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.m4zek.carrental.api.model.Offer;
 import pl.m4zek.carrental.api.model.Status;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class OfferService {
 
     private final OfferRepository repository;
@@ -32,7 +34,7 @@ public class OfferService {
                         .map(offerRolesService::findSingleOfferRole)
                         .collect(Collectors.toList()),
                 Status.valueOf(source.getStatus()),
-                source.getData_available()
+                source.getAvailableDate()
                 )));
     }
 
@@ -41,5 +43,4 @@ public class OfferService {
                 .map(OfferReadModel::new)
                 .collect(Collectors.toList());
     }
-
 }
