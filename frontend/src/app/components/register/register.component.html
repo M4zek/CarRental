@@ -1,0 +1,40 @@
+<div class="main_block">
+  <div class="container">
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="register(username.value, password.value, email.value, first_name.value, last_name.value)">
+      <div class="image"><i class='fas fa-user-plus'></i></div>
+
+      <div class="input_form">
+        <i class='fas fa-envelope'></i>
+        <input class="input" #email type="email" placeholder="Email"/>
+      </div>
+
+      <div class="input_form">
+        <i class='fas fa-user-alt'></i>
+        <input class="input" type="text" placeholder="Username" #username/>
+      </div>
+
+      <div class="input_form">
+        <i class='fas fa-lock'></i>
+        <input class="input" #password type="password" placeholder="Password"/>
+      </div>
+
+      <div class="input_form">
+        <i class='fas fa-lock'></i>
+        <input class="input" #password type="password" placeholder="Confirm password"/>
+      </div>
+
+      <div class="input_form">
+        <i class='fas fa-address-card'></i>
+        <input class="input" #first_name type="text" placeholder="Name"/>
+      </div>
+
+      <div class="input_form">
+        <i class='fas fa-address-card'></i>
+        <input class="input" #last_name type="text" placeholder="Surname"/>
+      </div>
+
+      <button class="btn">Register</button>
+    </form>
+    <p>I have already account! <a routerLink=""><span>Sign in.</span></a> </p>
+  </div>
+</div>

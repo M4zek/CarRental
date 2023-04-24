@@ -1,0 +1,62 @@
+#version: '3.8'
+#
+#services:
+#  backend:
+#    container_name: car_backend
+#    build:
+#      context: ./backend
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - mongo
+#    environment:
+#      - SPRING_DATA_MONGODB_HOST=mongo
+#      - SPRING_DATA_MONGODB_PORT=27017
+#
+#  mongo:
+#    container_name: car_db
+#    image: mongo:latest
+#    ports:
+#      - "27018:27017"
+
+#  frontend_app:
+#    container_name: frontend
+#    build:
+#      context: ./FE
+#      dockerfile: Dockerfile
+#    ports:
+#      - "4200:4200"
+
+version: '3.8'
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_DATA_MONGODB_PORT=27017
+  mongo:
+    container_name: database
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-db:/data/db
+  frontend_app:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+
+volumes:
+  mongo-db:

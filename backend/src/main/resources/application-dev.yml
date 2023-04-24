@@ -1,0 +1,26 @@
+##
+### Developer configuration
+##
+spring:
+  data:
+    mongodb:
+      port: 27018
+      host: localhost
+      database: test
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+jwt:
+  token:
+    secretKey: someSecretKey
+    expirationSec: 300            # 5 min
+    refreshExpirationSec: 900     # 15 min
+    header: Authorization
+    prefix: Bearer
+
+
+
+
+
+

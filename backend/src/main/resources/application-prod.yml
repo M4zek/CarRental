@@ -1,0 +1,32 @@
+##
+### Configuration for production
+##
+spring:
+  data:
+    mongodb:
+      port: 27017
+      host: localhost
+      database: cars
+      username: #<Username>
+      password: # <Password>
+      authentication-database: # <Authentication>
+
+jwt:
+  token:
+    secretKey: someSecretKey
+    expirationSec: 300            # 5 min
+    refreshExpirationSec: 900     # 15min
+    header: Authorization
+    prefix: Bearer
+
+
+springdoc:
+  swagger-ui:
+    try-it-out-enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+    filter: true
+
+m4zek:
+  openapi:
+
