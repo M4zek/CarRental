@@ -45,18 +45,18 @@ services:
       - SPRING_DATA_MONGODB_PORT=27017
   mongo:
     container_name: database
-    image: mongo:latest
+    image: mongo:4.4
     ports:
       - "27018:27017"
     volumes:
       - mongo-db:/data/db
-  frontend_app:
-    container_name: frontend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
+  # frontend_app:
+  #   container_name: frontend
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "80:80"
 
 volumes:
   mongo-db:
