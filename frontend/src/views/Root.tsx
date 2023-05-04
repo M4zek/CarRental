@@ -1,25 +1,20 @@
-import { createContext, useContext } from 'react';
+import { createContext, useState } from 'react';
 import AuthenticatedApp from "./AuthenticatedApp";
 import UnauthenticatedApp from "./UnauthenticatedApp";
-import { useLocation } from "react-router-dom";
 
 export const AppContext = createContext({
-  currentPath: '/',
-  // user: null,
-  user: {
-    name: 'Jan Kowalski',
-  },
+  currentPath: null,
+  user: null,
+  setAuthData: () => {},
 });
 
 const Root = () => {
-  
-  const location = useLocation();
-  const currentPath = location.pathname;
-  const { user } = useContext(AppContext);
+
+  const [authData, setAuthData] = useState({});
 
   return (
-    <AppContext.Provider value={{ currentPath, user }}>
-      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+    <AppContext.Provider value={{ ...authData, setAuthData }}>
+      {authData.user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </AppContext.Provider>
   )
 }

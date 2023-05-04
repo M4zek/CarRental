@@ -1,11 +1,6 @@
 import { StyledForm } from "./FormField.styles"
 
-const FormField = ({children}) => {
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+const FormField = ({handleSubmit, children}) => {
 
   return (
     <StyledForm as="form" onSubmit={handleSubmit}>

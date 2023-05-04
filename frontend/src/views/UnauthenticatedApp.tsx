@@ -1,13 +1,13 @@
-import { useContext } from 'react';
-import { AppContext } from './Root';
 import { FormWrapper } from './UnauthenticatedApp.styles';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 import Register from './Register';
 import Login from './Login';
 
 const UnauthenticatedApp = () => {
 
-  const { currentPath } = useContext(AppContext);
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   let endpoint: string = currentPath;
 
   return (

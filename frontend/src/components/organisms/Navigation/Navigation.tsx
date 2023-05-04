@@ -22,7 +22,7 @@ const Navigation = () => {
       </LinksContainer>
       <div>
         <img src={userAvatar} alt="user avatar" />
-        { user?.name }
+        { user?.firstname + ' ' + user?.lastname }
       </div>
     </Wrapper>
   )
