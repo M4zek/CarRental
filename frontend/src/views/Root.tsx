@@ -5,10 +5,10 @@ import { useLocation } from "react-router-dom";
 
 export const AppContext = createContext({
   currentPath: '/',
-  user: null,
-  // user: {
-  //   name: 'Jan Kowalski',
-  // },
+  // user: null,
+  user: {
+    name: 'Jan Kowalski',
+  },
 });
 
 const Root = () => {

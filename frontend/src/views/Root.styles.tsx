@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 100%;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
 `;

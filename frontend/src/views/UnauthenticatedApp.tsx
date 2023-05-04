@@ -1,16 +1,9 @@
 import { useContext } from 'react';
 import { AppContext } from './Root';
-import { Wrapper } from "./Root.styles"
+import { FormWrapper } from './UnauthenticatedApp.styles';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import BackgroundImage from '../assets/images/bg-waves.svg';
 import Register from './Register';
 import Login from './Login';
-
-const WrapperAdditionalStyles = {
-  backgroundImage: `url(${BackgroundImage})`,
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-};
 
 const UnauthenticatedApp = () => {
 
@@ -18,7 +11,7 @@ const UnauthenticatedApp = () => {
   let endpoint: string = currentPath;
 
   return (
-    <Wrapper style={WrapperAdditionalStyles}>
+    <FormWrapper>
       <Switch>
         <Route exact path="/">
           <Redirect to="/login" />
@@ -33,7 +26,7 @@ const UnauthenticatedApp = () => {
           <Redirect to="/login" />
         </Route>
       </Switch>
-    </Wrapper>
+    </FormWrapper>
   )
 }
 
