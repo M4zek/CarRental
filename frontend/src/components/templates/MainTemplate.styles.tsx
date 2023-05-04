@@ -7,5 +7,6 @@ export const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  margin-top: 68px;
   color: ${({ theme }) => theme.colors.black};
 `;

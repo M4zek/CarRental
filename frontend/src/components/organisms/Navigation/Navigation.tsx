@@ -1,10 +1,13 @@
-import React from 'react'
+import { useContext } from 'react'
 import { Wrapper, Logo, LinksContainer, StyledLink } from './Navigation.styles'
 
 import carLogo from '../../../assets/images/logo.svg'
 import userAvatar from '../../../assets/images/avatar.svg'
+import { AppContext } from '../../../views/Root'
 
 const Navigation = () => {
+
+  const { user } = useContext(AppContext);
 
   return (
     <Wrapper>
@@ -19,7 +22,7 @@ const Navigation = () => {
       </LinksContainer>
       <div>
         <img src={userAvatar} alt="user avatar" />
-        User
+        { user?.name }
       </div>
     </Wrapper>
   )
