@@ -1,17 +1,28 @@
 import { Wrapper } from "./Root.styles";
 import { Route, Switch, Redirect } from 'react-router-dom';
 import MainTemplate from "../components/templates/MainTemplate";
+import { ViewWrapper } from "../components/molecules/ViewWrapper/ViewWrapper";
 
 const AuthenticatedApp = () => {
   return (
     <MainTemplate>
       <Wrapper>
         <Switch>
-          <Route exact path="/">Strona główna</Route>
-          <Route exact path="/cars">Samochody</Route>
-          <Route exact path="/offer">Oferta</Route>
-          <Route exact path="/informations">Informacje</Route>
-          <Route exact path="/about-us">O nas</Route>
+          <Route exact path="/">
+            <ViewWrapper>Strona główna</ViewWrapper>
+          </Route>
+          <Route exact path="/cars">
+            <ViewWrapper>Samochody</ViewWrapper>
+          </Route>
+          <Route exact path="/offer">
+            <ViewWrapper>Oferta</ViewWrapper>
+          </Route>
+          <Route exact path="/informations">
+            <ViewWrapper>Informacje</ViewWrapper>
+          </Route>
+          <Route exact path="/about-us">
+            <ViewWrapper>O nas</ViewWrapper>
+          </Route>
           <Route path="*">
             <Redirect to="/" />
           </Route>
