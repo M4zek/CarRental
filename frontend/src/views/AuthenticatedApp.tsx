@@ -2,6 +2,7 @@ import { Wrapper } from "./Root.styles";
 import { Route, Switch, Redirect } from 'react-router-dom';
 import MainTemplate from "../components/templates/MainTemplate";
 import { ViewWrapper } from "../components/molecules/ViewWrapper/ViewWrapper";
+import AboutUs from "./AboutUs";
 
 const AuthenticatedApp = () => {
   return (
@@ -21,7 +22,7 @@ const AuthenticatedApp = () => {
             <ViewWrapper>Informacje</ViewWrapper>
           </Route>
           <Route exact path="/about-us">
-            <ViewWrapper>O nas</ViewWrapper>
+            <ViewWrapper><AboutUs /></ViewWrapper>
           </Route>
           <Route path="*">
             <Redirect to="/" />

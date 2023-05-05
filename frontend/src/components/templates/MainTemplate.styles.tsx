@@ -6,5 +6,5 @@ export const Wrapper = styled.div`
   display: grid;
   grid-template-rows: 68px 1fr;
   color: ${({ theme }) => theme.colors.black};
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.lightGrey};
 `;
