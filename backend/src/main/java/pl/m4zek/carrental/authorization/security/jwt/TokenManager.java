@@ -4,6 +4,7 @@ import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -54,22 +55,18 @@ public class TokenManager {
                 .compact();
     }
 
+
     public boolean validateToken(String token){
         try{
             Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
             return true;
-        } catch (MalformedJwtException e){
-            logger.error("Invalid token {}", e.getMessage());
-        } catch (SignatureException e){
-            logger.error("Invalid token signature {}", e.getMessage());
-        } catch (ExpiredJwtException e){
-            logger.error("Token is expired {}", e.getMessage());
-        } catch (UnsupportedJwtException e){
-            logger.error("Token is unsupported {}", e.getMessage());
-        } catch (IllegalArgumentException e){
-            logger.error("Token claims is empty {}", e.getMessage());
+        }catch (SignatureException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
+            logger.error("INVALID CREDENTIALS { " + ex.getMessage() + " }");
+            throw new BadCredentialsException("INVALID_CREDENTIALS", ex);
+        } catch (ExpiredJwtException ex) {
+            logger.error("JWT has expire { " + ex.getMessage() + " }");
+            throw ex;
         }
-        return false;
     }
 
     public String parseJwt(HttpServletRequest request) {

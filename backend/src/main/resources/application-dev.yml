@@ -10,11 +10,18 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+
 
 jwt:
   token:
     secretKey: someSecretKey
-    expirationSec: 300            # 5 min
+    expirationSec: 30            # 5 min
     refreshExpirationSec: 900     # 15 min
     header: Authorization
     prefix: Bearer
