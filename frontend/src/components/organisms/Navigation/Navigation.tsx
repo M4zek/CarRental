@@ -1,13 +1,23 @@
-import { useContext } from 'react'
 import { Wrapper, Logo, LinksContainer, StyledLink } from './Navigation.styles'
-
+import UserDropdown from '../../atoms/UserDropdown/UserDropdown'
 import carLogo from '../../../assets/images/logo.svg'
-import userAvatar from '../../../assets/images/avatar.svg'
-import { AppContext } from '../../../views/Root'
 
 const Navigation = () => {
 
-  const { user } = useContext(AppContext);
+  const menu = [
+    {
+      name: "Mój profil",
+      url: "my-profile",
+    },
+    {
+      name: "Moje wypożyczenia",
+      url: "my-rentals",
+    },
+    {
+      name: "Wyloguj",
+      url: "logout",
+    },
+  ]
 
   return (
     <Wrapper>
@@ -20,10 +30,7 @@ const Navigation = () => {
         <StyledLink to="/informations">Informacje</StyledLink>
         <StyledLink to="/about-us">O nas</StyledLink>
       </LinksContainer>
-      <div>
-        <img src={userAvatar} alt="user avatar" />
-        { user?.firstname + ' ' + user?.lastname }
-      </div>
+      <UserDropdown menuItems={menu} />
     </Wrapper>
   )
 }
