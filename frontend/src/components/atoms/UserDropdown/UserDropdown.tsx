@@ -1,13 +1,15 @@
-import { useState, useContext, useRef, useEffect } from "react";
-import { AppContext } from '../../../views/Root';
+import { useState, useRef, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { Container, Button, Dropdown, DropdownItem } from './UserDropdown.styles';
 import userAvatar from '../../../assets/images/avatar.svg';
+import { useAuth } from "../../../hooks/useAuth";
 
-const UserDropdown = ({ menuItems }) => {
+const UserDropdown = () => {
 
-  const { user } = useContext(AppContext);
-  const fullName = user?.firstname + ' ' + user?.lastname;
+  const auth = useAuth();
+  const user = auth.user;
+
+  const fullName = user?.firstName + ' ' + user?.lastName;
 
   const [open, setOpen] = useState(false);
   const ref = useRef();
@@ -34,13 +36,15 @@ const UserDropdown = ({ menuItems }) => {
         </span>
       </Button>
       <Dropdown open={open}>
-        {menuItems.map((item) => {
-          return (
-            <DropdownItem>
-              <Link to={item.url}>{item.name}</Link>
-            </DropdownItem>
-          );
-        })}
+        <DropdownItem>
+          <Link to='/my-profile'>Mój profil</Link>
+        </DropdownItem>
+        <DropdownItem>
+          <Link to='/my-rentals'>Moje wypożyczenia</Link>
+        </DropdownItem>
+        <DropdownItem>
+          <Link to='/logout'>Wyloguj</Link>
+        </DropdownItem>
       </Dropdown>
     </Container>
   );

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: relative;
   height: 100%;
-`;
+  `;
 
 export const Button = styled.button`
   height: 100%;
@@ -13,6 +13,7 @@ export const Button = styled.button`
   background-color: transparent;
   border: none;
   color: ${({ theme }) => theme.colors.white};
+  cursor: pointer;
 
   & span::after {
     display: inline-block;
@@ -48,7 +49,9 @@ export const DropdownItem = styled.div`
   border-radius: 0.25rem;
   
   & a {
-    text-decoration: none;    
+    width: 100%;
+    display: inline-block;
+    text-decoration: none;
     color: ${({ theme }) => theme.colors.black};
   }
 

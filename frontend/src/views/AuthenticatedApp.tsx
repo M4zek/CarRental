@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import MainTemplate from "../components/templates/MainTemplate";
 import { ViewWrapper } from "../components/molecules/ViewWrapper/ViewWrapper";
 import AboutUs from "./AboutUs";
+import LogoutPage from "./Logout";
 
 const AuthenticatedApp = () => {
   return (
@@ -23,6 +24,9 @@ const AuthenticatedApp = () => {
           </Route>
           <Route exact path="/about-us">
             <ViewWrapper><AboutUs /></ViewWrapper>
+          </Route>
+          <Route exact path="/logout">
+            <ViewWrapper><LogoutPage /></ViewWrapper>
           </Route>
           <Route path="*">
             <Redirect to="/" />

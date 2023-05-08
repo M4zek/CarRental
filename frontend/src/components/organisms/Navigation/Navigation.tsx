@@ -4,21 +4,6 @@ import carLogo from '../../../assets/images/logo.svg'
 
 const Navigation = () => {
 
-  const menu = [
-    {
-      name: "Mój profil",
-      url: "my-profile",
-    },
-    {
-      name: "Moje wypożyczenia",
-      url: "my-rentals",
-    },
-    {
-      name: "Wyloguj",
-      url: "logout",
-    },
-  ]
-
   return (
     <Wrapper>
       <Logo to="/">
@@ -30,7 +15,7 @@ const Navigation = () => {
         <StyledLink to="/informations">Informacje</StyledLink>
         <StyledLink to="/about-us">O nas</StyledLink>
       </LinksContainer>
-      <UserDropdown menuItems={menu} />
+      <UserDropdown />
     </Wrapper>
   )
 }
