@@ -4,7 +4,6 @@ import axios from 'axios';
 const AuthContext = React.createContext({});
 
 export const AuthProvider = ({ children }) => {
-  // const [user, setUser] = useState(null);
 
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('user');
@@ -14,21 +13,32 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+
     const token = localStorage.getItem('token');
-    if (token) {
-      (async () => {
-        try {
-          const response = await axios.get('/', {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + token,
-            },
-          });
-          setUser(response.data);
-        } catch (error) {
-          console.log(error);
-        }
-      })();
+    const expiration = localStorage.getItem('expiration');
+
+    if (token && expiration) {
+
+      const currentTime = new Date().getTime();
+
+      if (currentTime < expiration) {
+        (async () => {
+          try {
+            const response = await axios.get('/', {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+              },
+            });
+            setUser(response.data);
+          } catch (error) {
+            console.log(error);
+          }
+        })();
+      } else {
+        setError("Token użytkownika wygasł, zaloguj się ponownie.");
+        logOut();
+      }
     }
   }, []);
 
@@ -40,14 +50,21 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
+
       const response = await axios.post('http://localhost:8080/api/auth/authenticate', {
         username,
         password,
       });
       setUser(response.data);
+      
+      const expiration = new Date().getTime() + 0.1 * 60 * 1000;
+      
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('expiration', expiration.toString());
       localStorage.setItem('user', JSON.stringify(response.data));
+
     } catch (error) {
+      
       if (error.response) {
         if (error.response.status === 401) {
           setError("Incorrect username or password.");
@@ -66,6 +83,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('expiration');
   };
 
   return <AuthContext.Provider value={{ user, signIn, logOut, error }}>{children}</AuthContext.Provider>;
