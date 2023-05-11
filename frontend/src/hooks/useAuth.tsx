@@ -15,13 +15,13 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
 
     const token = localStorage.getItem('token');
-    const expiration = localStorage.getItem('expiration');
+    const tokenExpirationTime = localStorage.getItem('expiration');
 
-    if (token && expiration) {
+    if (token && tokenExpirationTime) {
 
       const currentTime = new Date().getTime();
 
-      if (currentTime < expiration) {
+      if (currentTime < tokenExpirationTime) {
         (async () => {
           try {
             const response = await axios.get('/', {
@@ -31,13 +31,13 @@ export const AuthProvider = ({ children }) => {
               },
             });
             setUser(response.data);
+            setupTokenExpirationTimer(tokenExpirationTime - currentTime)
           } catch (error) {
             console.log(error);
           }
         })();
       } else {
-        setError("Token użytkownika wygasł, zaloguj się ponownie.");
-        logOut();
+        setupTokenExpirationTimer(tokenExpirationTime)
       }
     }
   }, []);
@@ -56,12 +56,14 @@ export const AuthProvider = ({ children }) => {
         password,
       });
       setUser(response.data);
-      
-      const expiration = new Date().getTime() + 0.1 * 60 * 1000;
+
+      const expirationTime = 0.1 * 60 * 1000;
+      const expiration = new Date().getTime() + expirationTime;
       
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('expiration', expiration.toString());
       localStorage.setItem('user', JSON.stringify(response.data));
+      setupTokenExpirationTimer(expirationTime);
 
     } catch (error) {
       
@@ -84,6 +86,16 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('expiration');
+    clearTimeout(tokenExpirationTimer);
+  };
+
+  let tokenExpirationTimer;
+
+  const setupTokenExpirationTimer = (expirationTime) => {
+    tokenExpirationTimer = setTimeout(() => {
+      logOut();
+      setError("User token expired, please login again.");
+    }, expirationTime);
   };
 
   return <AuthContext.Provider value={{ user, signIn, logOut, error }}>{children}</AuthContext.Provider>;
