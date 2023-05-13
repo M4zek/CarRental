@@ -15,6 +15,7 @@ import pl.m4zek.carrental.authorization.service.RoleService;
 import pl.m4zek.carrental.authorization.service.UserService;
 
 import java.util.Collections;
+import java.util.TimeZone;
 
 @SpringBootApplication
 public class CarRentalApplication {
@@ -31,6 +32,7 @@ public class CarRentalApplication {
         this.roleService = roleService;
     }
     public static void main(String[] args) {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC+2:00"));
         SpringApplication.run(CarRentalApplication.class, args);
     }
 
